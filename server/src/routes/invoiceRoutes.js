@@ -1,0 +1,11 @@
+const express = require('express');
+const { list, create, createFromQuotation, update, remove } = require('../controllers/invoiceController');
+const { authenticate } = require('../middleware/auth');
+const router = express.Router();
+router.use(authenticate);
+router.get('/', list);
+router.post('/', create);
+router.post('/from-quotation/:quotationId', createFromQuotation);
+router.put('/:id', update);
+router.delete('/:id', remove);
+module.exports = router;

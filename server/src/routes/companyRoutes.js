@@ -1,0 +1,11 @@
+const express = require('express');
+const { list, getOne, create, update, remove } = require('../controllers/companyController');
+const { authenticate } = require('../middleware/auth');
+const router = express.Router();
+router.use(authenticate);
+router.get('/', list);
+router.get('/:id', getOne);
+router.post('/', create);
+router.put('/:id', update);
+router.delete('/:id', remove);
+module.exports = router;
