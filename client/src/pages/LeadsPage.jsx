@@ -118,25 +118,25 @@ export default function LeadsPage() {
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">First Name *</label>
-                    <input className="form-input" required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} />
+                    <input placeholder="Enter First Name" className="form-input" required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Last Name *</label>
-                    <input className="form-input" required value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} />
+                    <input placeholder="Enter Last Name" className="form-input" required value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} />
                   </div>
                 </div>
                 <div className="form-group">
                   <label className="form-label">Company Name</label>
-                  <input className="form-input" value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
+                  <input placeholder="Enter Company Name" className="form-input" value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
                 </div>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Email</label>
-                    <input type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                    <input placeholder="Enter Email" type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Phone</label>
-                    <input type="tel" className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                    <input placeholder="Enter Phone" type="tel" className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
                   </div>
                 </div>
                 <div className="grid-2col">
@@ -151,12 +151,12 @@ export default function LeadsPage() {
                   </div>
                   <div className="form-group">
                     <label className="form-label">Expected Revenue</label>
-                    <input type="number" className="form-input" value={form.expectedRevenue} onChange={e => setForm({...form, expectedRevenue: e.target.value})} />
+                    <input placeholder="Enter Expected Revenue" type="number" className="form-input" value={form.expectedRevenue} onChange={e => setForm({...form, expectedRevenue: e.target.value})} />
                   </div>
                 </div>
                 <div className="form-group">
                   <label className="form-label">Notes</label>
-                  <textarea className="form-input" rows="3" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
+                  <textarea placeholder="Enter Notes" className="form-input" rows="3" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
                 </div>
               </div>
               <div className="modal-footer">

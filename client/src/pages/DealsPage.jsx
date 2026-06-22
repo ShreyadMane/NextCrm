@@ -130,11 +130,11 @@ export default function DealsPage() {
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Value ($) *</label>
-                    <input type="number" min="0" step="100" className="form-input" required value={form.value} onChange={e => setForm({...form, value: e.target.value})} />
+                    <input placeholder="Enter Value" type="number" min="0" step="100" className="form-input" required value={form.value} onChange={e => setForm({...form, value: e.target.value})} />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Probability (%)</label>
-                    <input type="number" min="0" max="100" className="form-input" value={form.probability} onChange={e => setForm({...form, probability: e.target.value})} />
+                    <input placeholder="Enter Probability" type="number" min="0" max="100" className="form-input" value={form.probability} onChange={e => setForm({...form, probability: e.target.value})} />
                   </div>
                 </div>
                 <div className="grid-2col">
@@ -154,7 +154,7 @@ export default function DealsPage() {
                 </div>
                 <div className="form-group">
                   <label className="form-label">Notes</label>
-                  <textarea className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
+                  <textarea placeholder="Enter Notes" className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
                 </div>
               </div>
               <div className="modal-footer">

@@ -137,7 +137,7 @@ export default function TasksPage() {
                 </div>
                 <div className="form-group">
                   <label className="form-label">Description</label>
-                  <textarea className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
+                  <textarea placeholder="Enter Description" className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
                 </div>
                 <div className="grid-2col">
                   <div className="form-group">

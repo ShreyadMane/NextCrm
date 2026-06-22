@@ -91,7 +91,7 @@ export default function CompaniesPage() {
             <div className="modal-header"><h2 className="modal-title">Add New Company</h2><button className="btn-icon" onClick={() => setShowModal(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
-                <div className="form-group"><label className="form-label">Company Name *</label><input className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
+                <div className="form-group"><label className="form-label">Company Name *</label><input placeholder="Enter Company Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
                 
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Industry</label>
@@ -103,27 +103,27 @@ export default function CompaniesPage() {
                       <option value="OTHER">Other</option>
                     </select>
                   </div>
-                  <div className="form-group"><label className="form-label">GST/VAT Number</label><input className="form-input" value={form.gstVatNumber} onChange={e => setForm({...form, gstVatNumber: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">GST/VAT Number</label><input placeholder="Enter GST/VAT Number" className="form-input" value={form.gstVatNumber} onChange={e => setForm({...form, gstVatNumber: e.target.value})} /></div>
                 </div>
 
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Employee Count</label><input type="number" className="form-input" value={form.employeeCount} onChange={e => setForm({...form, employeeCount: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Annual Revenue ($)</label><input type="number" className="form-input" value={form.annualRevenue} onChange={e => setForm({...form, annualRevenue: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Employee Count</label><input placeholder="Enter Employee Count" type="number" className="form-input" value={form.employeeCount} onChange={e => setForm({...form, employeeCount: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Annual Revenue ($)</label><input placeholder="Enter Annual Revenue" type="number" className="form-input" value={form.annualRevenue} onChange={e => setForm({...form, annualRevenue: e.target.value})} /></div>
                 </div>
 
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Website</label><input className="form-input" value={form.website} onChange={e => setForm({...form, website: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Phone</label><input className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Website</label><input placeholder="Enter Website" className="form-input" value={form.website} onChange={e => setForm({...form, website: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Phone</label><input placeholder="Enter Phone" className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} /></div>
                 </div>
 
-                <div className="form-group"><label className="form-label">Email</label><input type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} /></div>
+                <div className="form-group"><label className="form-label">Email</label><input placeholder="Enter Email" type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} /></div>
                 
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Billing Address</label><input className="form-input" value={form.billingAddress} onChange={e => setForm({...form, billingAddress: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Shipping Address</label><input className="form-input" value={form.shippingAddress} onChange={e => setForm({...form, shippingAddress: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Billing Address</label><input placeholder="Enter Billing Address" className="form-input" value={form.billingAddress} onChange={e => setForm({...form, billingAddress: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Shipping Address</label><input placeholder="Enter Shipping Address" className="form-input" value={form.shippingAddress} onChange={e => setForm({...form, shippingAddress: e.target.value})} /></div>
                 </div>
 
-                <div className="form-group"><label className="form-label">Description</label><textarea className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea></div>
+                <div className="form-group"><label className="form-label">Description</label><textarea placeholder="Enter Description" className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea></div>
               </div>
               <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Save Company</button></div>
             </form>

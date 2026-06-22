@@ -61,19 +61,19 @@ export default function ProductsPage() {
             <div className="modal-header"><h2 className="modal-title">Add Product</h2><button className="btn-icon" onClick={() => setShowModal(false)}>✕</button></div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
-                <div className="form-group"><label className="form-label">Name *</label><input className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
+                <div className="form-group"><label className="form-label">Name *</label><input placeholder="Enter Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Product Code</label><input className="form-input" value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Category</label><input className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Product Code</label><input placeholder="Enter Product Code" className="form-input" value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Category</label><input placeholder="Enter Category" className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})} /></div>
                 </div>
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Unit Price ($) *</label><input type="number" step="0.01" className="form-input" required value={form.unitPrice} onChange={e => setForm({...form, unitPrice: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Stock Quantity</label><input type="number" className="form-input" value={form.stockQuantity} onChange={e => setForm({...form, stockQuantity: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Unit Price ($) *</label><input placeholder="Enter Unit Price" type="number" step="0.01" className="form-input" required value={form.unitPrice} onChange={e => setForm({...form, unitPrice: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Stock Quantity</label><input placeholder="Enter Stock Quantity" type="number" className="form-input" value={form.stockQuantity} onChange={e => setForm({...form, stockQuantity: e.target.value})} /></div>
                 </div>
                 <div className="form-group"><label className="form-label">Status</label>
                   <select className="form-input" value={form.status} onChange={e => setForm({...form, status: e.target.value})}><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select>
                 </div>
-                <div className="form-group"><label className="form-label">Description</label><textarea className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea></div>
+                <div className="form-group"><label className="form-label">Description</label><textarea placeholder="Enter Description" className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea></div>
               </div>
               <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
             </form>

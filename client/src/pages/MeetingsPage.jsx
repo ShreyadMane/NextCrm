@@ -80,14 +80,14 @@ export default function MeetingsPage() {
             <div className="modal-header"><h2 className="modal-title">Schedule Meeting</h2><button className="btn-icon" onClick={() => setShowModal(false)}>✕</button></div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
-                <div className="form-group"><label className="form-label">Title *</label><input className="form-input" required value={form.title} onChange={e => setForm({...form, title: e.target.value})} /></div>
+                <div className="form-group"><label className="form-label">Title *</label><input placeholder="Enter Title" className="form-input" required value={form.title} onChange={e => setForm({...form, title: e.target.value})} /></div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Start Time *</label><input type="datetime-local" className="form-input" required value={form.startDate} onChange={e => setForm({...form, startDate: e.target.value})} /></div>
                   <div className="form-group"><label className="form-label">End Time</label><input type="datetime-local" className="form-input" value={form.endDate} onChange={e => setForm({...form, endDate: e.target.value})} /></div>
                 </div>
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Location</label><input className="form-input" value={form.location} onChange={e => setForm({...form, location: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Meeting Link</label><input type="url" className="form-input" value={form.meetingLink} onChange={e => setForm({...form, meetingLink: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Location</label><input placeholder="Enter Location" className="form-input" value={form.location} onChange={e => setForm({...form, location: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Meeting Link</label><input placeholder="Enter Meeting Link" type="url" className="form-input" value={form.meetingLink} onChange={e => setForm({...form, meetingLink: e.target.value})} /></div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Related Contact</label>
@@ -103,7 +103,7 @@ export default function MeetingsPage() {
                     </select>
                   </div>
                 </div>
-                <div className="form-group"><label className="form-label">Notes</label><textarea className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea></div>
+                <div className="form-group"><label className="form-label">Notes</label><textarea placeholder="Enter Notes" className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea></div>
               </div>
               <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Schedule</button></div>
             </form>
