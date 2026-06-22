@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInvoices, createInvoice, updateInvoice } from '../features/invoices/invoicesSlice';
+import { fetchContacts } from '../features/contacts/contactsSlice';
+import { fetchCompanies } from '../features/companies/companiesSlice';
+import { fetchDeals } from '../features/deals/dealsSlice';
 import { useToast } from '../components/Toast';
 
 const STATUS_COLORS = { DRAFT: 'gray', SENT: 'blue', PAID: 'green', OVERDUE: 'red', CANCELLED: 'amber' };
@@ -9,10 +12,19 @@ export default function InvoicesPage() {
   const dispatch = useDispatch();
   const toast = useToast();
   const { items, status } = useSelector((s) => s.invoices);
+  const contacts = useSelector((s) => s.contacts.items);
+  const companies = useSelector((s) => s.companies.items);
+  const deals = useSelector((s) => s.deals.items);
+  
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], dueDate: '', notes: '' });
+  const [form, setForm] = useState({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], dueDate: '', notes: '', contactId: '', companyId: '', dealId: '' });
 
-  useEffect(() => { dispatch(fetchInvoices()); }, [dispatch]);
+  useEffect(() => { 
+    dispatch(fetchInvoices()); 
+    dispatch(fetchContacts({ limit: 100 }));
+    dispatch(fetchCompanies());
+    dispatch(fetchDeals());
+  }, [dispatch]);
 
   const addItem = () => setForm({ ...form, items: [...form.items, { description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }] });
   const removeItem = (idx) => setForm({ ...form, items: form.items.filter((_, i) => i !== idx) });
@@ -56,7 +68,7 @@ export default function InvoicesPage() {
     if (!res.error) { 
       toast.success('Invoice created'); 
       setShowModal(false); 
-      setForm({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], dueDate: '', notes: '' }); 
+      setForm({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], dueDate: '', notes: '', contactId: '', companyId: '', dealId: '' }); 
     }
     else toast.error('Failed to create invoice');
   };
@@ -103,11 +115,12 @@ export default function InvoicesPage() {
           <div className="empty-state"><div className="empty-state-icon">🧾</div><h3 className="empty-state-title">No Invoices</h3><p className="empty-state-desc">Create your first invoice.</p></div>
         ) : (
           <table className="data-table">
-            <thead><tr><th>Invoice #</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th><th>Due Date</th><th style={{ width: 120 }}>Action</th></tr></thead>
+            <thead><tr><th>Invoice #</th><th>Client</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th><th>Due Date</th><th style={{ width: 120 }}>Action</th></tr></thead>
             <tbody>
               {items.map(inv => (
                 <tr key={inv._id}>
                   <td style={{ fontWeight: 600, color: 'var(--accent-blue)' }}>{inv.invoiceNumber}</td>
+                  <td style={{ fontSize: 13 }}>{inv.contactId ? `${inv.contactId.firstName} ${inv.contactId.lastName}` : inv.companyId?.name || '-'}</td>
                   <td style={{ fontWeight: 600 }}>{fmt(inv.total || inv.grandTotal)}</td>
                   <td style={{ color: 'var(--accent-green)' }}>{fmt(inv.paidAmount)}</td>
                   <td style={{ color: 'var(--accent-red)' }}>{fmt(inv.balanceAmount)}</td>
@@ -129,6 +142,29 @@ export default function InvoicesPage() {
         <div className="modal-overlay"><div className="modal-content" style={{ maxWidth: 800 }}>
           <div className="modal-header"><h2 className="modal-title">Create Invoice</h2><button className="btn-icon" onClick={() => setShowModal(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
           <form onSubmit={handleSubmit}><div className="modal-body">
+            <div className="grid-2col" style={{ marginBottom: 16 }}>
+              <div className="form-group">
+                <label className="form-label">Client (Contact)</label>
+                <select className="form-input" value={form.contactId} onChange={e => setForm({...form, contactId: e.target.value})}>
+                  <option value="">Select Contact...</option>
+                  {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Account (Company)</label>
+                <select className="form-input" value={form.companyId} onChange={e => setForm({...form, companyId: e.target.value})}>
+                  <option value="">Select Company...</option>
+                  {companies.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="form-group" style={{ marginBottom: 16 }}>
+                <label className="form-label">Related Deal</label>
+                <select className="form-input" value={form.dealId} onChange={e => setForm({...form, dealId: e.target.value})}>
+                  <option value="">None</option>
+                  {deals.map(d => <option key={d._id} value={d._id}>{d.dealName}</option>)}
+                </select>
+            </div>
             <div style={{ marginBottom: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <label className="form-label" style={{ margin: 0 }}>Line Items</label>

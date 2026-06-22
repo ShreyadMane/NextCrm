@@ -2,6 +2,23 @@ require("dotenv").config();
 
 const http = require("http");
 const express = require("express");
+
+// Express 4 Async Error Monkey Patch
+const Layer = require('express/lib/router/layer');
+const handleRequest = Layer.prototype.handle_request;
+Layer.prototype.handle_request = function (req, res, next) {
+  if (!this.isAsync) {
+    this.isAsync = true;
+    const fn = this.handle;
+    this.handle = function (req, res, next) {
+      const result = fn.apply(this, arguments);
+      if (result && result.catch) result.catch(next);
+      return result;
+    };
+  }
+  return handleRequest.apply(this, arguments);
+};
+
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");

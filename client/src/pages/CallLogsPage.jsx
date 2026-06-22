@@ -72,7 +72,7 @@ export default function CallLogsPage() {
                 </div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Call Date *</label><input type="datetime-local" className="form-input" required value={form.callDate} onChange={e => setForm({...form, callDate: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Duration (min)</label><input type="number" className="form-input" value={form.durationMinutes} onChange={e => setForm({...form, durationMinutes: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Duration (min)</label><input type="number" placeholder="e.g. 15" className="form-input" value={form.durationMinutes} onChange={e => setForm({...form, durationMinutes: e.target.value})} /></div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Direction</label>
@@ -86,7 +86,7 @@ export default function CallLogsPage() {
                     </select>
                   </div>
                 </div>
-                <div className="form-group"><label className="form-label">Notes</label><textarea className="form-input" rows="3" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea></div>
+                <div className="form-group"><label className="form-label">Notes</label><textarea className="form-input" placeholder="Enter Notes" rows="3" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea></div>
               </div>
               <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
             </form>

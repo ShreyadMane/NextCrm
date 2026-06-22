@@ -4,7 +4,15 @@ const jwt = require('jsonwebtoken');
 let io;
 
 function initSocket(httpServer) {
-  io = new Server(httpServer, { cors: { origin: process.env.FRONTEND_URL } });
+  io = new Server(httpServer, { 
+    cors: { 
+      origin: [
+        process.env.FRONTEND_URL,
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+      ].filter(Boolean)
+    } 
+  });
 
   io.use((socket, next) => {
     try {

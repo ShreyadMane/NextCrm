@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuotations, createQuotation, updateQuotation } from '../features/quotations/quotationsSlice';
+import { fetchContacts } from '../features/contacts/contactsSlice';
+import { fetchCompanies } from '../features/companies/companiesSlice';
+import { fetchDeals } from '../features/deals/dealsSlice';
 import { useToast } from '../components/Toast';
 
 const STATUS_COLORS = { DRAFT: 'gray', SENT: 'blue', ACCEPTED: 'green', REJECTED: 'red', EXPIRED: 'amber' };
@@ -9,10 +12,19 @@ export default function QuotationsPage() {
   const dispatch = useDispatch();
   const toast = useToast();
   const { items, status } = useSelector((s) => s.quotations);
+  const contacts = useSelector((s) => s.contacts.items);
+  const companies = useSelector((s) => s.companies.items);
+  const deals = useSelector((s) => s.deals.items);
+  
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], notes: '' });
+  const [form, setForm] = useState({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], notes: '', contactId: '', companyId: '', dealId: '' });
 
-  useEffect(() => { dispatch(fetchQuotations()); }, [dispatch]);
+  useEffect(() => { 
+    dispatch(fetchQuotations()); 
+    dispatch(fetchContacts({ limit: 100 }));
+    dispatch(fetchCompanies());
+    dispatch(fetchDeals());
+  }, [dispatch]);
 
   const addItem = () => setForm({ ...form, items: [...form.items, { description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }] });
   const removeItem = (idx) => setForm({ ...form, items: form.items.filter((_, i) => i !== idx) });
@@ -54,7 +66,7 @@ export default function QuotationsPage() {
     if (!res.error) { 
       toast.success('Quotation created'); 
       setShowModal(false); 
-      setForm({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], notes: '' }); 
+      setForm({ items: [{ description: '', quantity: 1, unitPrice: 0, discount: 0, tax: 0 }], notes: '', contactId: '', companyId: '', dealId: '' }); 
     }
     else toast.error('Failed to create quotation');
   };
@@ -83,11 +95,12 @@ export default function QuotationsPage() {
           <div className="empty-state"><div className="empty-state-icon">📋</div><h3 className="empty-state-title">No Quotations</h3><p className="empty-state-desc">Create your first quotation.</p></div>
         ) : (
           <table className="data-table">
-            <thead><tr><th>Number</th><th>Items</th><th>Subtotal</th><th>Discount</th><th>Tax</th><th>Total</th><th>Status</th><th>Date</th><th style={{ width: 120 }}>Action</th></tr></thead>
+            <thead><tr><th>Number</th><th>Client</th><th>Items</th><th>Subtotal</th><th>Discount</th><th>Tax</th><th>Total</th><th>Status</th><th>Date</th><th style={{ width: 120 }}>Action</th></tr></thead>
             <tbody>
               {items.map(q => (
                 <tr key={q._id}>
                   <td style={{ fontWeight: 600, color: 'var(--accent-blue)' }}>{q.quotationNumber}</td>
+                  <td style={{ fontSize: 13 }}>{q.contactId ? `${q.contactId.firstName} ${q.contactId.lastName}` : q.companyId?.name || '-'}</td>
                   <td>{q.items?.length || 0} items</td>
                   <td>{fmt(q.subTotal)}</td>
                   <td style={{ color: 'var(--accent-red)' }}>{fmt(q.totalDiscount)}</td>
@@ -111,6 +124,29 @@ export default function QuotationsPage() {
         <div className="modal-overlay"><div className="modal-content" style={{ maxWidth: 800 }}>
           <div className="modal-header"><h2 className="modal-title">Create Quotation</h2><button className="btn-icon" onClick={() => setShowModal(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
           <form onSubmit={handleSubmit}><div className="modal-body">
+            <div className="grid-2col" style={{ marginBottom: 16 }}>
+              <div className="form-group">
+                <label className="form-label">Client (Contact)</label>
+                <select className="form-input" value={form.contactId} onChange={e => setForm({...form, contactId: e.target.value})}>
+                  <option value="">Select Contact...</option>
+                  {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Account (Company)</label>
+                <select className="form-input" value={form.companyId} onChange={e => setForm({...form, companyId: e.target.value})}>
+                  <option value="">Select Company...</option>
+                  {companies.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="form-group" style={{ marginBottom: 16 }}>
+                <label className="form-label">Related Deal</label>
+                <select className="form-input" value={form.dealId} onChange={e => setForm({...form, dealId: e.target.value})}>
+                  <option value="">None</option>
+                  {deals.map(d => <option key={d._id} value={d._id}>{d.dealName}</option>)}
+                </select>
+            </div>
             <div style={{ marginBottom: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <label className="form-label" style={{ margin: 0 }}>Line Items</label>
