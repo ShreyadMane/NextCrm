@@ -94,35 +94,66 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className="login-split-right">
-        <div style={{ maxWidth: 480, margin: 'auto 0 auto 10%', position: 'relative', zIndex: 2 }}>
-          <h1 style={{ fontSize: 48, fontWeight: 800, lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.03em' }}>
+      <div className="login-split-right" style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Animated Background Shapes */}
+        <div style={{ 
+          position: 'absolute', right: -50, bottom: -50, width: 500, height: 500, 
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', 
+          filter: 'blur(40px)', animation: 'float-slow 8s ease-in-out infinite alternate' 
+        }}></div>
+        <div style={{ 
+          position: 'absolute', left: -100, top: 100, width: 400, height: 400, 
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%)', 
+          filter: 'blur(30px)', animation: 'float-medium 6s ease-in-out infinite alternate-reverse' 
+        }}></div>
+        <div style={{ 
+          position: 'absolute', right: 200, top: -150, width: 600, height: 600, 
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)', 
+          filter: 'blur(50px)', animation: 'float-fast 10s ease-in-out infinite alternate' 
+        }}></div>
+
+        <div style={{ maxWidth: 520, margin: 'auto 0 auto 10%', position: 'relative', zIndex: 2 }}>
+          <h1 style={{ fontSize: 52, fontWeight: 800, lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.03em', textShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             Drive revenue with clarity.
           </h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, opacity: 0.9, marginBottom: 40, fontWeight: 400 }}>
             NexCRM gives your team the visibility and speed they need to close deals faster and build stronger relationships.
           </p>
           
-          <div style={{ background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(12px)', padding: 24, borderRadius: 16, border: '1px solid rgba(255,255,255,0.2)' }}>
-            <p style={{ fontSize: 16, fontStyle: 'italic', marginBottom: 16, lineHeight: 1.5 }}>
+          <div style={{ 
+            background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(16px)', 
+            padding: '32px', borderRadius: 20, border: '1px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.15)'
+          }}>
+            <p style={{ fontSize: 16, fontStyle: 'italic', marginBottom: 24, lineHeight: 1.6 }}>
               "Switching to NexCRM was the best decision for our sales team. We increased our close rate by 40% in the first quarter."
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'white', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'white', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 18 }}>
                 A
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 14 }}>Alex Morgan</div>
-                <div style={{ opacity: 0.8, fontSize: 12 }}>VP of Sales, TechFlow</div>
+                <div style={{ fontWeight: 700, fontSize: 15 }}>Alex Morgan</div>
+                <div style={{ opacity: 0.8, fontSize: 13 }}>VP of Sales, TechFlow</div>
               </div>
             </div>
           </div>
         </div>
-        
-        {/* Decorative elements */}
-        <div style={{ position: 'absolute', right: -100, bottom: -100, width: 400, height: 400, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', filter: 'blur(60px)' }}></div>
-        <div style={{ position: 'absolute', left: 100, top: -100, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', filter: 'blur(40px)' }}></div>
       </div>
+      <style>{`
+        @keyframes float-slow {
+          0% { transform: translateY(0) scale(1); }
+          100% { transform: translateY(-30px) scale(1.05); }
+        }
+        @keyframes float-medium {
+          0% { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(20px, 30px) scale(1.1); }
+        }
+        @keyframes float-fast {
+          0% { transform: rotate(0deg) scale(1); }
+          100% { transform: rotate(5deg) scale(1.02); }
+        }
+      `}</style>
     </div>
   );
 }
