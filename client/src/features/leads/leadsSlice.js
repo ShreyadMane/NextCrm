@@ -11,8 +11,8 @@ export const createLead = createAsyncThunk('leads/create', async (payload) => {
   return data.data;
 });
 
-export const updateLead = createAsyncThunk('leads/update', async ({ id, stage }) => {
-  const { data } = await api.put(`/leads/${id}/move`, { stage });
+export const updateLead = createAsyncThunk('leads/update', async ({ id, status }) => {
+  const { data } = await api.put(`/leads/${id}/move`, { status });
   return data.data;
 });
 
@@ -29,8 +29,8 @@ const leadsSlice = createSlice({
       })
       .addCase(createLead.fulfilled, (state, action) => {
         const lead = action.payload;
-        if (!state.byStage[lead.stage]) state.byStage[lead.stage] = [];
-        state.byStage[lead.stage].unshift(lead);
+        if (!state.byStage[lead.status]) state.byStage[lead.status] = [];
+        state.byStage[lead.status].unshift(lead);
       })
       .addCase(updateLead.fulfilled, (state, action) => {
         const updatedLead = action.payload;
@@ -39,8 +39,8 @@ const leadsSlice = createSlice({
           state.byStage[stage] = state.byStage[stage].filter(l => l._id !== updatedLead._id);
         });
         // Add to new stage
-        if (!state.byStage[updatedLead.stage]) state.byStage[updatedLead.stage] = [];
-        state.byStage[updatedLead.stage].unshift(updatedLead);
+        if (!state.byStage[updatedLead.status]) state.byStage[updatedLead.status] = [];
+        state.byStage[updatedLead.status].unshift(updatedLead);
       });
   },
 });

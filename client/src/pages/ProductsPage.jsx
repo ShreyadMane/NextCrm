@@ -15,7 +15,7 @@ export default function ProductsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await dispatch(createProduct({...form, unitPrice: Number(form.unitPrice), stockQuantity: Number(form.stockQuantity)}));
+    const res = await dispatch(createProduct({...form, productName: form.name, unitPrice: Number(form.unitPrice), stockQuantity: Number(form.stockQuantity)}));
     if (!res.error) {
       toast.success('Product created');
       setShowModal(false);
@@ -41,7 +41,7 @@ export default function ProductsPage() {
             <tbody>
               {items.map(p => (
                 <tr key={p._id}>
-                  <td style={{ fontWeight: 600 }}>{p.name}</td>
+                  <td style={{ fontWeight: 600 }}>{p.productName || p.name}</td>
                   <td>{p.productCode || '-'}</td>
                   <td>{p.category || '-'}</td>
                   <td style={{ fontWeight: 600, color: 'var(--accent-blue)' }}>{formatCurrency(p.unitPrice)}</td>
@@ -63,7 +63,7 @@ export default function ProductsPage() {
               <div className="modal-body">
                 <div className="form-group"><label className="form-label">Name *</label><input placeholder="Enter Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Product Code</label><input placeholder="Enter Product Code" className="form-input" value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
+                  <div className="form-group"><label className="form-label">Product Code *</label><input placeholder="Enter Product Code" className="form-input" required value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
                   <div className="form-group"><label className="form-label">Category</label><input placeholder="Enter Category" className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})} /></div>
                 </div>
                 <div className="grid-2col">
