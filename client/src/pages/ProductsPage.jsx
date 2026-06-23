@@ -9,7 +9,7 @@ export default function ProductsPage() {
   const { items, status } = useSelector(s => s.products);
 
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', productCode: '', category: '', unitPrice: 0, description: '', stockQuantity: 0, status: 'ACTIVE' });
+  const [form, setForm] = useState({ name: '', productCode: '', category: 'OTHER', unitPrice: 0, description: '', stockQuantity: 0, status: 'ACTIVE' });
 
   useEffect(() => { dispatch(fetchProducts()); }, [dispatch]);
 
@@ -19,7 +19,7 @@ export default function ProductsPage() {
     if (!res.error) {
       toast.success('Product created');
       setShowModal(false);
-      setForm({ name: '', productCode: '', category: '', unitPrice: 0, description: '', stockQuantity: 0, status: 'ACTIVE' });
+      setForm({ name: '', productCode: '', category: 'OTHER', unitPrice: 0, description: '', stockQuantity: 0, status: 'ACTIVE' });
     } else toast.error('Failed to create product');
   };
 
@@ -64,7 +64,17 @@ export default function ProductsPage() {
                 <div className="form-group"><label className="form-label">Name *</label><input placeholder="Enter Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Product Code *</label><input placeholder="Enter Product Code" className="form-input" required value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Category</label><input placeholder="Enter Category" className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})} /></div>
+                  <div className="form-group">
+                    <label className="form-label">Category</label>
+                    <select className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
+                      <option value="SOFTWARE">Software</option>
+                      <option value="HARDWARE">Hardware</option>
+                      <option value="SERVICE">Service</option>
+                      <option value="SUBSCRIPTION">Subscription</option>
+                      <option value="CONSULTING">Consulting</option>
+                      <option value="OTHER">Other</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group"><label className="form-label">Unit Price ($) *</label><input placeholder="Enter Unit Price" type="number" step="0.01" className="form-input" required value={form.unitPrice} onChange={e => setForm({...form, unitPrice: e.target.value})} /></div>
