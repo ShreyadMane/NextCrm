@@ -12,7 +12,7 @@ export const createLead = createAsyncThunk('leads/create', async (payload) => {
 });
 
 export const updateLead = createAsyncThunk('leads/update', async ({ id, status }) => {
-  const { data } = await api.put(`/leads/${id}/move`, { status });
+  const { data } = await api.put(`/leads/${id}`, { status });
   return data.data;
 });
 
