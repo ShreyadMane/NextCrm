@@ -62,7 +62,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid-stats" style={{ marginBottom: '24px', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+      <div className="grid-stats" style={{ marginBottom: 24 }}>
         <StatCard label="Total Contacts" value={stats?.contactCount || 0} icon="users" color="blue" link="/contacts" />
         <StatCard label="Open Leads" value={stats?.openLeads || 0} icon="target" color="amber" link="/leads" />
         <StatCard label="Open Deals" value={stats?.openDeals || 0} icon="briefcase" color="purple" link="/deals" />

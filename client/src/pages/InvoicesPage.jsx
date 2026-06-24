@@ -171,13 +171,17 @@ export default function InvoicesPage() {
                 <button type="button" className="btn-ghost" onClick={addItem} style={{ fontSize: 12 }}>+ Add Item</button>
               </div>
               {form.items.map((item, idx) => (
-                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto', gap: 8, marginBottom: 8 }}>
+                <div key={idx} className="line-item-grid">
                   <input className="form-input" placeholder="Description" value={item.description} onChange={e => updateItem(idx, 'description', e.target.value)} required title="Description" />
                   <input type="number" className="form-input" placeholder="Qty" min="1" value={item.quantity} onChange={e => updateItem(idx, 'quantity', e.target.value)} title="Quantity" />
                   <input type="number" className="form-input" placeholder="Price" min="0" step="0.01" value={item.unitPrice} onChange={e => updateItem(idx, 'unitPrice', e.target.value)} title="Unit Price" />
                   <input type="number" className="form-input" placeholder="Discount" min="0" step="0.01" value={item.discount} onChange={e => updateItem(idx, 'discount', e.target.value)} title="Discount Amount" />
                   <input type="number" className="form-input" placeholder="Tax" min="0" step="0.01" value={item.tax} onChange={e => updateItem(idx, 'tax', e.target.value)} title="Tax Amount" />
-                  {form.items.length > 1 && <button type="button" className="btn-icon" onClick={() => removeItem(idx)} style={{ color: 'var(--accent-red)' }}>×</button>}
+                  {form.items.length > 1 && (
+                    <button type="button" className="btn-icon" onClick={() => removeItem(idx)} style={{ color: 'var(--accent-red)' }} title="Remove item">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

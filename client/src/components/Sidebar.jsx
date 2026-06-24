@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import AppLogo from './AppLogo';
 
 const NAV_ITEMS = [
   {
@@ -55,9 +56,8 @@ export default function Sidebar() {
   return (
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <div className="logo-icon">N</div>
-        <span className="logo-text">NexCRM</span>
-        <button className="btn-icon" onClick={() => setCollapsed(!collapsed)} style={{ marginLeft: 'auto' }} title={collapsed ? 'Expand' : 'Collapse'}>
+        <AppLogo showText={!collapsed} />
+        <button className="btn-icon sidebar-toggle" onClick={() => setCollapsed(!collapsed)} title={collapsed ? 'Expand' : 'Collapse'}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             {collapsed ? (<><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>) : (<><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>)}
           </svg>

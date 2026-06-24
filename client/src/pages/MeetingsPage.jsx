@@ -62,11 +62,15 @@ export default function MeetingsPage() {
                     <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{m.location || 'No location'}</div>
                   </td>
                   <td>
-                    {m.relatedContact ? <div style={{ fontSize: 13 }}>👤 {m.relatedContact.firstName} {m.relatedContact.lastName}</div> : null}
-                    {m.relatedDeal ? <div style={{ fontSize: 13 }}>💼 {m.relatedDeal.dealName}</div> : null}
+                    {m.relatedContact ? <div style={{ fontSize: 13 }}>Contact: {m.relatedContact.firstName} {m.relatedContact.lastName}</div> : null}
+                    {m.relatedDeal ? <div style={{ fontSize: 13 }}>Deal: {m.relatedDeal.dealName}</div> : null}
                   </td>
                   <td><span className={`badge badge-${m.status === 'SCHEDULED' ? 'blue' : m.status === 'COMPLETED' ? 'green' : 'red'}`}>{m.status}</span></td>
-                  <td style={{ textAlign: 'right' }}><button className="btn-icon" onClick={() => handleDelete(m._id)}>🗑️</button></td>
+                  <td style={{ textAlign: 'right' }}>
+                    <button className="btn-icon" onClick={() => handleDelete(m._id)} title="Delete meeting">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -77,7 +81,12 @@ export default function MeetingsPage() {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content" style={{ maxWidth: 600 }}>
-            <div className="modal-header"><h2 className="modal-title">Schedule Meeting</h2><button className="btn-icon" onClick={() => setShowModal(false)}>✕</button></div>
+            <div className="modal-header">
+              <h2 className="modal-title">Schedule Meeting</h2>
+              <button className="btn-icon" onClick={() => setShowModal(false)} title="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
                 <div className="form-group"><label className="form-label">Title *</label><input placeholder="Enter Title" className="form-input" required value={form.title} onChange={e => setForm({...form, title: e.target.value})} /></div>

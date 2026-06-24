@@ -75,7 +75,7 @@ export default function Navbar() {
         </span>
         <input
           type="text"
-          placeholder="Search contacts, leads, deals…"
+          placeholder="Search contacts, leads, deals..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => searchResults && setShowSearch(true)}

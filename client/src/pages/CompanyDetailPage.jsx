@@ -43,7 +43,7 @@ export default function CompanyDetailPage() {
 
   return (
     <div>
-      <div className="page-header" style={{ marginBottom: 20 }}>
+      <div className="page-header" style={{ display: 'block', marginBottom: 20 }}>
         <button className="btn-ghost" onClick={() => navigate('/companies')} style={{ marginBottom: 12 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           Back to Companies
@@ -53,7 +53,7 @@ export default function CompanyDetailPage() {
             <div style={{ width: 64, height: 64, borderRadius: 12, background: 'var(--bg-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, fontWeight: 700, color: 'var(--accent-purple)' }}>{company.name[0]}</div>
             <div>
               <h1 className="page-title">{company.name}</h1>
-              <p className="page-subtitle">{company.industry || 'No industry'} • {company.employeeCount || company.size || 0} employees</p>
+              <p className="page-subtitle">{company.industry || 'No industry'} - {company.employeeCount || company.size || 0} employees</p>
             </div>
           </div>
           {!editing && <button className="btn-secondary" onClick={() => setEditing(true)}>Edit Company</button>}
