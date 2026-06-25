@@ -1,8 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../app/axios';
 
-export const fetchLeads = createAsyncThunk('leads/fetch', async () => {
-  const { data } = await api.get('/leads');
+const toQueryString = (params = {}) => {
+  const query = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value && value !== 'ALL') query.set(key, value);
+  });
+  return query.toString();
+};
+
+export const fetchLeads = createAsyncThunk('leads/fetch', async (params = {}) => {
+  const query = toQueryString(params);
+  const { data } = await api.get(`/leads${query ? `?${query}` : ''}`);
   return data.data; // this is the grouped object
 });
 
@@ -11,8 +20,8 @@ export const createLead = createAsyncThunk('leads/create', async (payload) => {
   return data.data;
 });
 
-export const updateLead = createAsyncThunk('leads/update', async ({ id, status }) => {
-  const { data } = await api.put(`/leads/${id}`, { status });
+export const updateLead = createAsyncThunk('leads/update', async ({ id, ...payload }) => {
+  const { data } = await api.put(`/leads/${id}`, payload);
   return data.data;
 });
 

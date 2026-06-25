@@ -1116,6 +1116,225 @@ textarea.form-input {
   margin-top: 4px;
 }
 
+.tracking-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 16px;
+}
+
+.tracking-toolbar-row {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.tracking-toolbar-row.wrap {
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.tracking-search {
+  flex: 1 1 280px;
+  max-width: 440px;
+  position: relative;
+}
+
+.tracking-search svg {
+  color: var(--text-muted);
+  left: 13px;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tracking-search .form-input {
+  padding-left: 40px;
+}
+
+.tracking-filter-grid {
+  display: grid;
+  flex: 1;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  min-width: 280px;
+}
+
+.tracking-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tracking-control label {
+  color: var(--text-tertiary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.segmented-control {
+  align-items: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+}
+
+.segmented-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 6px;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 10px;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.segmented-button:hover {
+  color: var(--text-primary);
+}
+
+.segmented-button.active {
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+  color: var(--accent-blue);
+}
+
+.tracking-metrics {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-bottom: 18px;
+}
+
+.tracking-metric {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  min-height: 82px;
+  padding: 14px 16px;
+}
+
+.tracking-metric span {
+  color: var(--text-tertiary);
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tracking-metric strong {
+  color: var(--text-primary);
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 8px;
+}
+
+.tracking-metric small {
+  color: var(--text-muted);
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.tracking-table {
+  min-width: 920px;
+}
+
+.record-list {
+  overflow: hidden;
+}
+
+.record-title {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.record-subtitle {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.record-person {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+}
+
+.record-avatar {
+  align-items: center;
+  background: #eaf2ff;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 999px;
+  color: var(--accent-blue);
+  display: flex;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.record-meta {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  gap: 7px;
+}
+
+.inline-select {
+  background-color: var(--bg-secondary);
+  min-height: 34px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+.due-text {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.due-text.overdue {
+  color: var(--accent-red);
+}
+
+.due-text.today {
+  color: var(--accent-amber);
+}
+
+.due-text.done {
+  color: var(--accent-green);
+}
+
 .spinner {
   animation: spin 0.7s linear infinite;
   border: 2px solid var(--border-default);

@@ -1,8 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../app/axios';
 
-export const fetchTasks = createAsyncThunk('tasks/fetch', async () => {
-  const { data } = await api.get('/tasks');
+const toQueryString = (params = {}) => {
+  const query = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value && value !== 'ALL') query.set(key, value);
+  });
+  return query.toString();
+};
+
+export const fetchTasks = createAsyncThunk('tasks/fetch', async (params = {}) => {
+  const query = toQueryString(params);
+  const { data } = await api.get(`/tasks${query ? `?${query}` : ''}`);
   return data.data;
 });
 
