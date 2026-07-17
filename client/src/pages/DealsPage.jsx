@@ -100,66 +100,113 @@ export default function DealsPage() {
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content" style={{ maxWidth: 600 }}>
-            <div className="modal-header">
-              <h2 className="modal-title">Create New Deal</h2>
-              <button className="btn-icon" onClick={() => setShowModal(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <div className="modal-content" style={{ maxWidth: 700 }}>
+            <div className="modal-header" style={{ borderBottom: '1px solid var(--border-default)', paddingBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--accent-blue-glow)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-rounded">handshake</span>
+                </div>
+                <div>
+                  <h2 className="modal-title" style={{ margin: 0 }}>Create New Deal</h2>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0 0' }}>Add a new sales opportunity to your pipeline.</p>
+                </div>
+              </div>
+              <button className="btn-icon" onClick={() => setShowModal(false)}>
+                <span className="material-symbols-rounded">close</span>
+              </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="modal-body">
+              <div className="modal-body" style={{ padding: '24px', maxHeight: '70vh', overflowY: 'auto' }}>
+                
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>work</span>
+                  Deal Information
+                </h3>
                 <div className="form-group">
                   <label className="form-label">Deal Name *</label>
-                  <input className="form-input" required value={form.dealName} onChange={e => setForm({...form, dealName: e.target.value})} placeholder="e.g. Acme Corp Enterprise License" />
+                  <div className="form-input-with-icon">
+                    <span className="material-symbols-rounded">title</span>
+                    <input className="form-input" required value={form.dealName} onChange={e => setForm({...form, dealName: e.target.value})} placeholder="e.g. Acme Corp Enterprise License" />
+                  </div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Account (Company)</label>
-                    <select className="form-input" value={form.accountId} onChange={e => setForm({...form, accountId: e.target.value})}>
-                      <option value="">Select Account...</option>
-                      {companies.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
-                    </select>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">domain</span>
+                      <select className="form-input" value={form.accountId} onChange={e => setForm({...form, accountId: e.target.value})}>
+                        <option value="">Select Account...</option>
+                        {companies.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                      </select>
+                    </div>
                   </div>
                   <div className="form-group">
                     <label className="form-label">Contact</label>
-                    <select className="form-input" value={form.contactId} onChange={e => setForm({...form, contactId: e.target.value})}>
-                      <option value="">Select Contact...</option>
-                      {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
-                    </select>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">person</span>
+                      <select className="form-input" value={form.contactId} onChange={e => setForm({...form, contactId: e.target.value})}>
+                        <option value="">Select Contact...</option>
+                        {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
+                      </select>
+                    </div>
                   </div>
                 </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>monitoring</span>
+                  Value & Timing
+                </h3>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Value ($) *</label>
-                    <input placeholder="Enter Value" type="number" min="0" step="100" className="form-input" required value={form.value} onChange={e => setForm({...form, value: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">attach_money</span>
+                      <input placeholder="Enter Value" type="number" min="0" step="100" className="form-input" required value={form.value} onChange={e => setForm({...form, value: e.target.value})} />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label className="form-label">Probability (%)</label>
-                    <input placeholder="Enter Probability" type="number" min="0" max="100" className="form-input" value={form.probability} onChange={e => setForm({...form, probability: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">percent</span>
+                      <input placeholder="Enter Probability" type="number" min="0" max="100" className="form-input" value={form.probability} onChange={e => setForm({...form, probability: e.target.value})} />
+                    </div>
                   </div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Expected Close Date</label>
-                    <input type="date" className="form-input" value={form.expectedCloseDate} onChange={e => setForm({...form, expectedCloseDate: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">calendar_today</span>
+                      <input type="date" className="form-input" value={form.expectedCloseDate} onChange={e => setForm({...form, expectedCloseDate: e.target.value})} />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label className="form-label">Source</label>
-                    <select className="form-input" value={form.source} onChange={e => setForm({...form, source: e.target.value})}>
-                      <option value="WEBSITE">Website</option>
-                      <option value="REFERRAL">Referral</option>
-                      <option value="COLD_CALL">Cold Call</option>
-                      <option value="OTHER">Other</option>
-                    </select>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">campaign</span>
+                      <select className="form-input" value={form.source} onChange={e => setForm({...form, source: e.target.value})}>
+                        <option value="WEBSITE">Website</option>
+                        <option value="REFERRAL">Referral</option>
+                        <option value="PARTNER">Partner</option>
+                        <option value="COLD_CALL">Cold Call</option>
+                        <option value="OTHER">Other</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-                <div className="form-group">
+
+                <div className="form-group" style={{ marginTop: 16 }}>
                   <label className="form-label">Notes</label>
-                  <textarea placeholder="Enter Notes" className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
+                  <textarea placeholder="Enter any notes about this deal..." className="form-input" rows="3" style={{ paddingLeft: 12 }} value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
                 </div>
+                
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer" style={{ borderTop: '1px solid var(--border-default)', paddingTop: 16, marginTop: 8 }}>
                 <button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button>
-                <button type="submit" className="btn-primary">Create Deal</button>
+                <button type="submit" className="btn-primary">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18, marginRight: 6, verticalAlign: 'text-bottom' }}>check_circle</span>
+                  Create Deal
+                </button>
               </div>
             </form>
           </div>

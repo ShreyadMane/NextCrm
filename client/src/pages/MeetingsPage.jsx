@@ -80,41 +80,118 @@ export default function MeetingsPage() {
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content" style={{ maxWidth: 600 }}>
-            <div className="modal-header">
-              <h2 className="modal-title">Schedule Meeting</h2>
+          <div className="modal-content" style={{ maxWidth: 700 }}>
+            <div className="modal-header" style={{ borderBottom: '1px solid var(--border-default)', paddingBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--accent-blue-glow)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-rounded">event_available</span>
+                </div>
+                <div>
+                  <h2 className="modal-title" style={{ margin: 0 }}>Schedule Meeting</h2>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0 0' }}>Plan a new meeting or call.</p>
+                </div>
+              </div>
               <button className="btn-icon" onClick={() => setShowModal(false)} title="Close">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <span className="material-symbols-rounded">close</span>
               </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="modal-body">
-                <div className="form-group"><label className="form-label">Title *</label><input placeholder="Enter Title" className="form-input" required value={form.title} onChange={e => setForm({...form, title: e.target.value})} /></div>
-                <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Start Time *</label><input type="datetime-local" className="form-input" required value={form.startDate} onChange={e => setForm({...form, startDate: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">End Time</label><input type="datetime-local" className="form-input" value={form.endDate} onChange={e => setForm({...form, endDate: e.target.value})} /></div>
-                </div>
-                <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Location</label><input placeholder="Enter Location" className="form-input" value={form.location} onChange={e => setForm({...form, location: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Meeting Link</label><input placeholder="Enter Meeting Link" type="url" className="form-input" value={form.meetingLink} onChange={e => setForm({...form, meetingLink: e.target.value})} /></div>
-                </div>
-                <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Related Contact</label>
-                    <select className="form-input" value={form.relatedContact} onChange={e => setForm({...form, relatedContact: e.target.value})}>
-                      <option value="">None</option>
-                      {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
-                    </select>
-                  </div>
-                  <div className="form-group"><label className="form-label">Related Deal</label>
-                    <select className="form-input" value={form.relatedDeal} onChange={e => setForm({...form, relatedDeal: e.target.value})}>
-                      <option value="">None</option>
-                      {deals.map(d => <option key={d._id} value={d._id}>{d.dealName}</option>)}
-                    </select>
+              <div className="modal-body" style={{ padding: '24px', maxHeight: '70vh', overflowY: 'auto' }}>
+                
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>event</span>
+                  Event Details
+                </h3>
+                <div className="form-group">
+                  <label className="form-label">Title *</label>
+                  <div className="form-input-with-icon">
+                    <span className="material-symbols-rounded">title</span>
+                    <input placeholder="Enter Title" className="form-input" required value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
                   </div>
                 </div>
-                <div className="form-group"><label className="form-label">Notes</label><textarea placeholder="Enter Notes" className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea></div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>schedule</span>
+                  Schedule
+                </h3>
+                <div className="grid-2col">
+                  <div className="form-group">
+                    <label className="form-label">Start Time *</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">play_circle</span>
+                      <input type="datetime-local" className="form-input" required value={form.startDate} onChange={e => setForm({...form, startDate: e.target.value})} />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">End Time</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">stop_circle</span>
+                      <input type="datetime-local" className="form-input" value={form.endDate} onChange={e => setForm({...form, endDate: e.target.value})} />
+                    </div>
+                  </div>
+                </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>location_on</span>
+                  Location & Link
+                </h3>
+                <div className="grid-2col">
+                  <div className="form-group">
+                    <label className="form-label">Location</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">place</span>
+                      <input placeholder="Enter Location" className="form-input" value={form.location} onChange={e => setForm({...form, location: e.target.value})} />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Meeting Link</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">video_call</span>
+                      <input placeholder="Enter Meeting Link" type="url" className="form-input" value={form.meetingLink} onChange={e => setForm({...form, meetingLink: e.target.value})} />
+                    </div>
+                  </div>
+                </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>link</span>
+                  Associations
+                </h3>
+                <div className="grid-2col">
+                  <div className="form-group">
+                    <label className="form-label">Related Contact</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">person</span>
+                      <select className="form-input" value={form.relatedContact} onChange={e => setForm({...form, relatedContact: e.target.value})}>
+                        <option value="">None</option>
+                        {contacts.map(c => <option key={c._id} value={c._id}>{c.firstName} {c.lastName}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Related Deal</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">handshake</span>
+                      <select className="form-input" value={form.relatedDeal} onChange={e => setForm({...form, relatedDeal: e.target.value})}>
+                        <option value="">None</option>
+                        {deals.map(d => <option key={d._id} value={d._id}>{d.dealName}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginTop: 16 }}>
+                  <label className="form-label">Notes</label>
+                  <textarea placeholder="Enter Notes" className="form-input" rows="3" style={{ paddingLeft: 12 }} value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
+                </div>
+                
               </div>
-              <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Schedule</button></div>
+              <div className="modal-footer" style={{ borderTop: '1px solid var(--border-default)', paddingTop: 16, marginTop: 8 }}>
+                <button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button>
+                <button type="submit" className="btn-primary">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18, marginRight: 6, verticalAlign: 'text-bottom' }}>check_circle</span>
+                  Schedule
+                </button>
+              </div>
             </form>
           </div>
         </div>
