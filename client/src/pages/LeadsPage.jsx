@@ -178,7 +178,7 @@ export default function LeadsPage() {
           <p className="page-subtitle">Track and qualify prospects from first touch to conversion.</p>
         </div>
         <button className="btn-primary" onClick={() => setShowModal(true)}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+          <span className="material-symbols-rounded" style={{ fontSize: 18, marginRight: 4, verticalAlign: 'text-bottom' }}>add_circle</span>
           New Lead
         </button>
       </div>
@@ -186,7 +186,7 @@ export default function LeadsPage() {
       <div className="glass-card tracking-toolbar">
         <div className="tracking-toolbar-row wrap">
           <div className="tracking-search">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+            <span className="material-symbols-rounded" style={{ color: 'var(--text-muted)' }}>search</span>
             <input
               className="form-input"
               placeholder="Search leads by name, company, email, or notes..."
@@ -197,11 +197,11 @@ export default function LeadsPage() {
 
           <div className="segmented-control" aria-label="Lead view">
             <button className={`segmented-button ${viewMode === 'board' ? 'active' : ''}`} onClick={() => setViewMode('board')} type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="18" rx="1" /><rect x="14" y="3" width="7" height="18" rx="1" /></svg>
+              <span className="material-symbols-rounded" style={{ fontSize: 18 }}>view_kanban</span>
               Board
             </button>
             <button className={`segmented-button ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')} type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+              <span className="material-symbols-rounded" style={{ fontSize: 18 }}>list</span>
               List
             </button>
           </div>
@@ -237,10 +237,22 @@ export default function LeadsPage() {
       </div>
 
       <div className="tracking-metrics">
-        <div className="tracking-metric"><span>Matching leads</span><strong>{filteredLeads.length}</strong><small>{allLeads.length} loaded</small></div>
-        <div className="tracking-metric"><span>Open pipeline</span><strong>{openCount}</strong><small>Not converted or lost</small></div>
-        <div className="tracking-metric"><span>Hot leads</span><strong>{hotCount}</strong><small>Highest rating</small></div>
-        <div className="tracking-metric"><span>Expected value</span><strong>{formatCurrency(revenueTotal)}</strong><small>Filtered total</small></div>
+        <div className="tracking-metric">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-muted)' }}><span className="material-symbols-rounded" style={{ fontSize: 16, color: 'var(--accent-blue)' }}>group</span> Matching leads</span>
+          <strong>{filteredLeads.length}</strong><small>{allLeads.length} loaded</small>
+        </div>
+        <div className="tracking-metric">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-muted)' }}><span className="material-symbols-rounded" style={{ fontSize: 16, color: 'var(--accent-cyan)' }}>linear_scale</span> Open pipeline</span>
+          <strong>{openCount}</strong><small>Not converted or lost</small>
+        </div>
+        <div className="tracking-metric">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-muted)' }}><span className="material-symbols-rounded" style={{ fontSize: 16, color: 'var(--accent-red)' }}>local_fire_department</span> Hot leads</span>
+          <strong>{hotCount}</strong><small>Highest rating</small>
+        </div>
+        <div className="tracking-metric">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-muted)' }}><span className="material-symbols-rounded" style={{ fontSize: 16, color: 'var(--accent-green)' }}>payments</span> Expected value</span>
+          <strong>{formatCurrency(revenueTotal)}</strong><small>Filtered total</small>
+        </div>
       </div>
 
       {loadStatus === 'loading' && allLeads.length === 0 ? (
@@ -249,7 +261,7 @@ export default function LeadsPage() {
         <div className="glass-card">
           <div className="empty-state">
             <div className="empty-state-icon">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+              <span className="material-symbols-rounded" style={{ fontSize: 48, color: 'var(--text-muted)' }}>inbox</span>
             </div>
             <h3 className="empty-state-title">No leads found</h3>
             <p className="empty-state-desc">Try adjusting the tracking filters or create a new lead.</p>
