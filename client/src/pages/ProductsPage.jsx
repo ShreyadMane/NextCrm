@@ -61,40 +61,107 @@ export default function ProductsPage() {
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2 className="modal-title">Add Product</h2>
+          <div className="modal-content" style={{ maxWidth: 700 }}>
+            <div className="modal-header" style={{ borderBottom: '1px solid var(--border-default)', paddingBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--accent-blue-glow)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-rounded">inventory_2</span>
+                </div>
+                <div>
+                  <h2 className="modal-title" style={{ margin: 0 }}>Add Product</h2>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0 0' }}>Add a new item or service to your catalog.</p>
+                </div>
+              </div>
               <button className="btn-icon" onClick={() => setShowModal(false)} title="Close">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <span className="material-symbols-rounded">close</span>
               </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="modal-body">
-                <div className="form-group"><label className="form-label">Name *</label><input placeholder="Enter Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
-                <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Product Code *</label><input placeholder="Enter Product Code" className="form-input" required value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} /></div>
-                  <div className="form-group">
-                    <label className="form-label">Category</label>
-                    <select className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
-                      <option value="SOFTWARE">Software</option>
-                      <option value="HARDWARE">Hardware</option>
-                      <option value="SERVICE">Service</option>
-                      <option value="SUBSCRIPTION">Subscription</option>
-                      <option value="CONSULTING">Consulting</option>
-                      <option value="OTHER">Other</option>
-                    </select>
+              <div className="modal-body" style={{ padding: '24px', maxHeight: '70vh', overflowY: 'auto' }}>
+                
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>inventory_2</span>
+                  Product Details
+                </h3>
+                <div className="form-group">
+                  <label className="form-label">Name *</label>
+                  <div className="form-input-with-icon">
+                    <span className="material-symbols-rounded">label</span>
+                    <input placeholder="Enter Name" className="form-input" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
                   </div>
                 </div>
                 <div className="grid-2col">
-                  <div className="form-group"><label className="form-label">Unit Price ($) *</label><input placeholder="Enter Unit Price" type="number" step="0.01" className="form-input" required value={form.unitPrice} onChange={e => setForm({...form, unitPrice: e.target.value})} /></div>
-                  <div className="form-group"><label className="form-label">Stock Quantity</label><input placeholder="Enter Stock Quantity" type="number" className="form-input" value={form.stockQuantity} onChange={e => setForm({...form, stockQuantity: e.target.value})} /></div>
+                  <div className="form-group">
+                    <label className="form-label">Product Code *</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">qr_code</span>
+                      <input placeholder="Enter Product Code" className="form-input" required value={form.productCode} onChange={e => setForm({...form, productCode: e.target.value})} />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Category</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">category</span>
+                      <select className="form-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
+                        <option value="SOFTWARE">Software</option>
+                        <option value="HARDWARE">Hardware</option>
+                        <option value="SERVICE">Service</option>
+                        <option value="SUBSCRIPTION">Subscription</option>
+                        <option value="CONSULTING">Consulting</option>
+                        <option value="OTHER">Other</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group"><label className="form-label">Status</label>
-                  <select className="form-input" value={form.status} onChange={e => setForm({...form, status: e.target.value})}><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>payments</span>
+                  Pricing & Stock
+                </h3>
+                <div className="grid-2col">
+                  <div className="form-group">
+                    <label className="form-label">Unit Price ($) *</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">attach_money</span>
+                      <input placeholder="Enter Unit Price" type="number" step="0.01" className="form-input" required value={form.unitPrice} onChange={e => setForm({...form, unitPrice: e.target.value})} />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Stock Quantity</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">shelves</span>
+                      <input placeholder="Enter Stock Quantity" type="number" className="form-input" value={form.stockQuantity} onChange={e => setForm({...form, stockQuantity: e.target.value})} />
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group"><label className="form-label">Description</label><textarea placeholder="Enter Description" className="form-input" rows="2" value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea></div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>info</span>
+                  Status & Description
+                </h3>
+                <div className="form-group">
+                  <label className="form-label">Status</label>
+                  <div className="form-input-with-icon">
+                    <span className="material-symbols-rounded">toggle_on</span>
+                    <select className="form-input" value={form.status} onChange={e => setForm({...form, status: e.target.value})}>
+                      <option value="ACTIVE">Active</option>
+                      <option value="INACTIVE">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group" style={{ marginTop: 16 }}>
+                  <label className="form-label">Description</label>
+                  <textarea placeholder="Enter Description" className="form-input" rows="3" style={{ paddingLeft: 12 }} value={form.description} onChange={e => setForm({...form, description: e.target.value})}></textarea>
+                </div>
+                
               </div>
-              <div className="modal-footer"><button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+              <div className="modal-footer" style={{ borderTop: '1px solid var(--border-default)', paddingTop: 16, marginTop: 8 }}>
+                <button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button>
+                <button type="submit" className="btn-primary">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18, marginRight: 6, verticalAlign: 'text-bottom' }}>check_circle</span>
+                  Save Product
+                </button>
+              </div>
             </form>
           </div>
         </div>
