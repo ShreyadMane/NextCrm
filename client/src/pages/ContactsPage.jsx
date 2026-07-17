@@ -133,73 +133,137 @@ export default function ContactsPage() {
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2 className="modal-title">Create New Contact</h2>
-              <button className="btn-icon" onClick={() => setShowModal(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <div className="modal-content" style={{ maxWidth: 700 }}>
+            <div className="modal-header" style={{ borderBottom: '1px solid var(--border-default)', paddingBottom: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--accent-blue-glow)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span className="material-symbols-rounded">person_add</span>
+                </div>
+                <div>
+                  <h2 className="modal-title" style={{ margin: 0 }}>Create New Contact</h2>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0 0' }}>Add a new contact to your CRM pipeline.</p>
+                </div>
+              </div>
+              <button className="btn-icon" onClick={() => setShowModal(false)}>
+                <span className="material-symbols-rounded">close</span>
+              </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="modal-body">
+              <div className="modal-body" style={{ padding: '24px', maxHeight: '70vh', overflowY: 'auto' }}>
+                
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>badge</span>
+                  Personal Details
+                </h3>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">First Name *</label>
-                    <input placeholder="Enter First Name" className="form-input" required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">person</span>
+                      <input placeholder="Enter First Name" className="form-input" required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label className="form-label">Last Name *</label>
-                    <input placeholder="Enter Last Name" className="form-input" required value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">person</span>
+                      <input placeholder="Enter Last Name" className="form-input" required value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} />
+                    </div>
                   </div>
                 </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>contact_mail</span>
+                  Contact Information
+                </h3>
                 <div className="grid-2col">
                   <div className="form-group">
-                    <label className="form-label">Email</label>
-                    <input placeholder="Enter Email" type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                    <label className="form-label">Email Address</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">mail</span>
+                      <input placeholder="Enter Email" type="email" className="form-input" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                    </div>
                   </div>
-                  <div className="grid-2col" style={{ gap: 8 }}>
+                  <div className="grid-2col" style={{ gap: 16 }}>
                     <div className="form-group">
                       <label className="form-label">Phone</label>
-                      <input placeholder="Enter Phone" type="tel" className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                      <div className="form-input-with-icon">
+                        <span className="material-symbols-rounded">call</span>
+                        <input placeholder="Enter Phone" type="tel" className="form-input" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                      </div>
                     </div>
                     <div className="form-group">
                       <label className="form-label">Mobile</label>
-                      <input placeholder="Enter Mobile" type="tel" className="form-input" value={form.mobile} onChange={e => setForm({...form, mobile: e.target.value})} />
+                      <div className="form-input-with-icon">
+                        <span className="material-symbols-rounded">smartphone</span>
+                        <input placeholder="Enter Mobile" type="tel" className="form-input" value={form.mobile} onChange={e => setForm({...form, mobile: e.target.value})} />
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>business_center</span>
+                  Company & Role
+                </h3>
                 <div className="grid-2col">
                   <div className="form-group">
-                    <label className="form-label">Company</label>
-                    <input placeholder="Enter Company" className="form-input" value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
+                    <label className="form-label">Company Name</label>
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">domain</span>
+                      <input placeholder="Enter Company" className="form-input" value={form.companyName} onChange={e => setForm({...form, companyName: e.target.value})} />
+                    </div>
                   </div>
-                  <div className="grid-2col" style={{ gap: 8 }}>
+                  <div className="grid-2col" style={{ gap: 16 }}>
                     <div className="form-group">
                       <label className="form-label">Job Title</label>
-                      <input placeholder="Enter Job Title" className="form-input" value={form.jobTitle} onChange={e => setForm({...form, jobTitle: e.target.value})} />
+                      <div className="form-input-with-icon">
+                        <span className="material-symbols-rounded">work</span>
+                        <input placeholder="Enter Job Title" className="form-input" value={form.jobTitle} onChange={e => setForm({...form, jobTitle: e.target.value})} />
+                      </div>
                     </div>
                     <div className="form-group">
                       <label className="form-label">Department</label>
-                      <input placeholder="Enter Department" className="form-input" value={form.department} onChange={e => setForm({...form, department: e.target.value})} />
+                      <div className="form-input-with-icon">
+                        <span className="material-symbols-rounded">groups</span>
+                        <input placeholder="Enter Department" className="form-input" value={form.department} onChange={e => setForm({...form, department: e.target.value})} />
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <h3 className="form-section-title">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18 }}>more_horiz</span>
+                  Additional Information
+                </h3>
                 <div className="form-group">
                   <label className="form-label">Address</label>
-                  <input placeholder="Enter Address" className="form-input" value={form.address} onChange={e => setForm({...form, address: e.target.value})} />
+                  <div className="form-input-with-icon">
+                    <span className="material-symbols-rounded">location_on</span>
+                    <input placeholder="Enter full address" className="form-input" value={form.address} onChange={e => setForm({...form, address: e.target.value})} />
+                  </div>
                 </div>
                 <div className="grid-2col">
                   <div className="form-group">
                     <label className="form-label">Social Profiles</label>
-                    <input className="form-input" placeholder="e.g. LinkedIn URL" value={form.socialProfiles} onChange={e => setForm({...form, socialProfiles: e.target.value})} />
+                    <div className="form-input-with-icon">
+                      <span className="material-symbols-rounded">public</span>
+                      <input className="form-input" placeholder="e.g. LinkedIn URL" value={form.socialProfiles} onChange={e => setForm({...form, socialProfiles: e.target.value})} />
+                    </div>
                   </div>
                   <div className="form-group">
                     <label className="form-label">Notes</label>
-                    <textarea placeholder="Enter Notes" className="form-input" rows="2" value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
+                    <textarea placeholder="Enter any additional notes..." className="form-input" rows="2" style={{ paddingLeft: 12, minHeight: 60 }} value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}></textarea>
                   </div>
                 </div>
+                
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer" style={{ borderTop: '1px solid var(--border-default)', paddingTop: 16, marginTop: 8 }}>
                 <button type="button" className="btn-ghost" onClick={() => setShowModal(false)}>Cancel</button>
-                <button type="submit" className="btn-primary">Save Contact</button>
+                <button type="submit" className="btn-primary">
+                  <span className="material-symbols-rounded" style={{ fontSize: 18, marginRight: 6, verticalAlign: 'text-bottom' }}>check_circle</span>
+                  Save Contact
+                </button>
               </div>
             </form>
           </div>

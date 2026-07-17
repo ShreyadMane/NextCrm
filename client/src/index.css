@@ -819,6 +819,47 @@ a {
   outline: none;
 }
 
+.form-input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input-with-icon .material-symbols-rounded {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  font-size: 20px;
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.form-input-with-icon .form-input {
+  padding-left: 40px;
+}
+
+.form-input-with-icon:focus-within .material-symbols-rounded {
+  color: var(--accent-blue);
+}
+
+.form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section-title:first-child {
+  margin-top: 0;
+}
+
 .form-input:disabled,
 .form-select:disabled,
 .form-textarea:disabled {
